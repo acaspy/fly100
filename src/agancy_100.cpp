@@ -1,9 +1,10 @@
 //============================================================================
-// Name        : agancy_01.cpp
+// Name        : agancy_100.cpp
 // Author      : 
 // Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Copyright   : Written by Tomer Snappir & Adir Caspy
+// Description : Our new web low-cost transportation agency Server side
+// API		   : API: (csv file of flights, start date, start city, end city, flights
 //============================================================================
 
 #include <iostream>
@@ -48,7 +49,6 @@ vector<int> spanDates (std::string start_s, std::string end_s, int flights) {
     	return res;
     }
     double days4flight = difference / (flights-1);
-    //std::cout << "TTTT difference = " << difference << " , flights = " << flights << " , days4flight = " << days4flight << std::endl;
 
     vector<int> res(flights);
     int buf = 0;;
@@ -65,28 +65,30 @@ vector<int> spanDates (std::string start_s, std::string end_s, int flights) {
 
 int main(int argc, char** argv) {
 	//args needed (csv file of flights, start date, start city, end city, flights
-	/*
-	 if (argc != 6) {
-	 	 std::cout << "5 arguments are needed! exit..." << std::endl;
-	 }
-	std::string fn = argv[0];
-	int start_date = atoi(argv[1]);
-	std::string start_city = argv[2];
-	int end_date = atoi(argv[3]);
-	std::string end_city = argv[4];
-	int flights = atoi(argv[5]);
-	tttt
-	 */
 
+	 if (argc != 7) {
+		 std::cout << "Wrong usage. should be: (csv file of flights, start date, start city, end date, end city, flights)" << std::endl;
+	 	 std::cout << "6 arguments are needed! got " << argc << ". exit..." << std::endl;
+	 }
+	std::string fn = argv[1];
+	std::string start_date = argv[2];
+	std::string start_city = argv[3];
+	std::string end_date = argv[4];
+	std::string end_city = argv[5];
+	int flights = atoi(argv[6]);
+
+
+/*
 	std::string fn = "C:\\Users\\tsnappir\\new_eclipse\\flights.csv";
 	std::string start_date = "20170401";
 	std::string start_city = "WAW";
 	std::string end_date = "20170420";
 	std::string end_city = "WAW";
 	std::string flights_s = "4";
-
-
 	int flights = atoi(flights_s.c_str());
+*/
+
+
 	std::string start_algo = start_city + "_" + start_date;
 	std::string end_algo = end_city + "_" + end_date;
 
