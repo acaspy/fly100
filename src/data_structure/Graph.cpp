@@ -25,7 +25,7 @@ Edge* Vertex::getEdge(Vertex* to) {
 }
 
 void Vertex::printVertex(std::ostream& fd) {
-	fd << "Printing vertex " << _id->getName() << " , date: " << _id->getDate() << std::endl;
+	fd << "Printing vertex " << _id->getFullName() << " , date: " << _id->getDate() << std::endl;
 	std::vector<Edge*> edges = getEdges();
 	for (unsigned int i=0; i< edges.size();i++) {
 		edges[i]->printEdge(fd);

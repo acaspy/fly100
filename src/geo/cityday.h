@@ -14,12 +14,10 @@ namespace geo {
 
 class cityday: public geo::city {
 public:
-	cityday(std::string id, int date) : city(id), _date (date) {}
-	virtual int getDate() {return _date;}
+	cityday(std::string id, int date);
 	virtual ~cityday();
 
 private:
-	int _date;
 };
 
 }

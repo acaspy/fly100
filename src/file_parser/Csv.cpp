@@ -13,7 +13,7 @@ namespace parser {
 Csv::~Csv() {
 }
 
-void Csv::parse(dataStracture::Graph* g, std::tr1::unordered_map<std::string,geo::city*>& places) {
+void Csv::parse(dataStracture::Graph* g) {
 	//std::tr1::unordered_map<std::string,geo::city*> places;
 	int line_length = 8;
 	std::ifstream input( _file.c_str() );
@@ -35,21 +35,16 @@ void Csv::parse(dataStracture::Graph* g, std::tr1::unordered_map<std::string,geo
 		to = arr_string[1] + "_" + arr_string[2];
 		double cost = atof( arr_string[5].c_str());
 		int date = atoi( arr_string[2].c_str());
-		if (places.count(from) != 1) {
+		city_from = geo::city::getCity(from);
+		if (city_from == 0) {
 			city_from = new geo::cityday(arr_string[0],date);
-			places[from] = city_from;
 			g->addVertex(city_from);
-		} else {
-			city_from = places[from];
 		}
-		if (places.count(to) != 1) {
+		city_to = geo::city::getCity(to);
+		if (city_to == 0) {
 			city_to = new geo::cityday(arr_string[1],date);
-			places[to] = city_to;
 			g->addVertex(city_to);
-		} else {
-			city_to = places[to];
 		}
-
 		t = g->getTran(city_from,city_to);
 		if (t != 0) {
 			if (cost < t->getCost()) {

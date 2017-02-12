@@ -19,7 +19,7 @@ namespace parser {
 class parser {
 public:
 	parser(std::string file) : _file (file) {}
-	virtual void parse (dataStracture::Graph* g, std::tr1::unordered_map<std::string,geo::city*>& places) = 0;
+	virtual void parse (dataStracture::Graph* g) = 0;
 	virtual ~parser();
 protected:
 	std::string _file;

@@ -20,7 +20,7 @@ class Csv: public parser {
 public:
 	Csv(std::string file) : parser(file) {}
 	virtual ~Csv();
-	virtual void parse (dataStracture::Graph* g, std::tr1::unordered_map<std::string,geo::city*>& places);
+	virtual void parse (dataStracture::Graph* g);
 };
 
 } /* namespace parser */

@@ -8,9 +8,9 @@
 //============================================================================
 
 #include <iostream>
+#include "data_structure/GraphBuilder.h"
 #include "algo/salesMan.h"
 #include "geo/city.h"
-#include "file_parser/Csv.h"
 #include <time.h>
 #include <ctime>
 #include <stdlib.h>
@@ -23,7 +23,6 @@ vector<int> spanDates (std::string start_s, std::string end_s, int flights) {
 	int start = atoi(start_s.c_str());
 	int end = atoi(end_s.c_str());
 
-	//20170406
 	int s_days = start % 100;
 	int e_days = end % 100;
 	start /= 100;
@@ -98,28 +97,27 @@ int main(int argc, char** argv) {
 		std::cout << "flight on " << dates[i] << std::endl;
 	}
 
-	dataStracture::Graph* g = new dataStracture::Graph();
-	std::tr1::unordered_map<std::string,geo::city*> places;
+	dataStracture::GraphBuilder gb;
+	dataStracture::Graph* g = gb.buildGraph(fn);
 
-	parser::Csv* p = new parser::Csv(fn);
-	std::cout << "Starting to parse " << fn << std::endl;
-	p->parse(g,places);
-	std::cout << "Done parsing" << std::endl;
+	//std::cout << "Print g" << std::endl;
+	//g->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g2.csv");
 
-	std::cout << "Print g" << std::endl;
+
 
 	dataStracture::Graph* g3 = new dataStracture::Graph();
 	g3->CloneFilteredGraph(g,dates,1,1);
 	std::cout << "Print g3" << std::endl;
-	//g3->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g3.csv");
+	g3->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g3.csv");
 
 	//std::cout << "Start to run algorithm" << std::endl;
-	  clock_t begin = clock();
+	clock_t begin = clock();
 
 	Graph_Algorithm::salesMan* sm = new Graph_Algorithm::salesMan(g3);
 	clock_t end = clock();
 	double elapsed_secs = double(end - begin) / (CLOCKS_PER_SEC/1000);
-	sm->calc(flights*2-1,places[start_algo],places[end_algo]);
+
+	sm->calc(flights*2-1,geo::city::getCity(start_algo),geo::city::getCity(end_algo));
 	std::cout << "time meas: " << elapsed_secs ;
 	return 0;
 }
