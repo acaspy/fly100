@@ -67,7 +67,8 @@ int main(int argc, char** argv) {
 
 	 if (argc != 7) {
 		 std::cout << "Wrong usage. should be: (csv file of flights, start date, start city, end date, end city, flights)" << std::endl;
-	 	 std::cout << "6 arguments are needed! got " << argc << ". exit..." << std::endl;
+	 	 std::cout << "6 arguments are needed! got " << argc << std::endl;
+	 	 std::cout << "usage example: agency_100.exe C:\\Users\\tsnappir\\new_eclipse\\flights.csv 20170401 WAW 20170420 WAW 4" << std::endl << "exit...";
 	 }
 	std::string fn = argv[1];
 	std::string start_date = argv[2];
