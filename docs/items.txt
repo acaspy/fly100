@@ -10,3 +10,5 @@
 10. span days
 11. error when the is no path
 12. wrong input line
+13.add date for each flight 
+14. sort by total price
