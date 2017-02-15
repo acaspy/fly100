@@ -1,3 +1,7 @@
+
+#ifndef DATA_STRUCTURE_GRAPH_H_
+#define DATA_STRUCTURE_GRAPH_H_
+
 #include <vector>
 #include <map>
 #include <iostream>
@@ -67,7 +71,6 @@ public:
     Vertex* getVertex( geo::city* id ) ;
     tran::transport* getTran( geo::city* from, geo::city* to);
 
-
 protected:
     Vertex* CreateVertex(geo::city* id);
 
@@ -81,3 +84,6 @@ private:
 
 
 }
+
+
+#endif /* DATA_STRUCTURE_GRAPH_H_ */

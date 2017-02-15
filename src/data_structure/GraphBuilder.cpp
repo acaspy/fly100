@@ -13,7 +13,6 @@ GraphBuilder::GraphBuilder() {}
 
 GraphBuilder::~GraphBuilder() {}
 
-
 Graph* GraphBuilder::buildGraph(std::string file) {
 	Graph* g = new Graph();
 	parser::Csv* p = new parser::Csv(file);
@@ -21,6 +20,40 @@ Graph* GraphBuilder::buildGraph(std::string file) {
 	p->parse(g);
 	delete p;
 	return g;
+}
+
+Graph* GraphBuilder::buildGraph(Graph* g, GraphFilter* gf, int addEdges) {
+	Graph* ng = new Graph();
+	std::vector<Vertex*> origVertices = g->getVertices();
+	std::vector<Vertex*> afterFilterVertices;
+int counter = 0;
+	for (unsigned int i=0;i<origVertices.size(); i++) {
+		Vertex* v = origVertices[i];
+
+		if (gf) {
+			if (! gf->valid(v)) {
+				continue;
+			}
+		}
+		counter++;
+		afterFilterVertices.push_back(v);
+		ng->addVertex(v->getId());
+	}
+	if (! addEdges) {
+		return ng;
+	}
+	for (unsigned int i=0;i<afterFilterVertices.size();i++) {
+		Vertex* v = afterFilterVertices[i];
+		std::vector<Edge*> edges = v->getEdges();
+		for (unsigned j=0; j<edges.size();j++) {
+			geo::city* dest = edges[j]->getDestination()->getId();
+			Vertex* to = ng->getVertex(dest);
+			if (to) {
+				ng->addEdge(v->getId(),dest,edges[j]->getTran());
+			}
+		}
+	}
+	return ng;
 }
 
 }/* namespace dataStracture */
