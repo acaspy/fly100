@@ -10,7 +10,6 @@
 #include <iostream>
 #include "data_structure/GraphBuilder.h"
 #include "data_structure/GraphFilter.h"
-#include "data_structure/addDummyEdges.h"
 
 #include "algo/salesMan.h"
 #include "utils/dateUtils.h"
@@ -75,8 +74,6 @@ int main(int argc, char** argv) {
 	//std::cout << "Print g3 before man" << std::endl;
 	//g3->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g3.csv");
 
-	dataStracture::GraphManipulator* gm = new dataStracture::addDummyEdges(g3,dates);
-	gm->manipulate();
 	//g3->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g4.csv");
 	//std::cout << "Start to run algorithm" << std::endl;
 	clock_t begin = clock();
