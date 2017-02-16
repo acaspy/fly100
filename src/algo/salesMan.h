@@ -57,6 +57,7 @@ public:
 	~salesMan();
 	std::vector<std::string> calc (int num, geo::city* start, geo::city* end);
 	int ElemExist(sm_pair* smp, std::string elem);
+	void Filter_Sort(smvector* smv);
 private:
 	dataStracture::Graph* _g;
 };

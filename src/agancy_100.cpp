@@ -65,11 +65,8 @@ int main(int argc, char** argv) {
 	//std::cout << "Print g" << std::endl;
 	//g->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g2.csv");
 
-	dataStracture::GraphFilter* gf = new dataStracture::GraphFilter;
-	gf->setDates(dates);
+	dataStracture::GraphFilter* gf = new dataStracture::GraphFilter(dates);
 	dataStracture::Graph* g3 = gb.buildGraph(g,gf,1);
-
-	Utils::GraphUtils::addDummyEdges(g3,dates);
 
 	//std::cout << "Print g3 before man" << std::endl;
 	//g3->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g3.csv");
@@ -81,8 +78,8 @@ int main(int argc, char** argv) {
 	Graph_Algorithm::salesMan* sm = new Graph_Algorithm::salesMan(g3);
 	clock_t end = clock();
 	double elapsed_secs = double(end - begin) / (CLOCKS_PER_SEC/1000);
-
 	sm->calc(flights*2-1,geo::city::getCity(start_algo),geo::city::getCity(end_algo));
 	std::cout << "time meas: " << elapsed_secs ;
+
 	return 0;
 }

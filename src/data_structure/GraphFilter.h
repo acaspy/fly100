@@ -14,12 +14,10 @@ namespace dataStracture {
 
 class GraphFilter {
 public:
-	GraphFilter();
+	GraphFilter(std::vector<int>& dates) : _dates(dates) {}
 	virtual ~GraphFilter();
 	virtual bool valid(Vertex* v);
-	void setDates(std::vector<int> dates) {
-		_dates = dates;
-	}
+	std::vector<int> getDates () {return _dates;}
 	void setFilteredCities(std::vector<std::string> cityNames) {
 		_cities = cityNames;
 	}

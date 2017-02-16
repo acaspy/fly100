@@ -89,8 +89,24 @@ std::vector<std::string> Graph_Algorithm::salesMan::calc (int num, geo::city* st
 		return tmp;
 	}
 	smv = current[cur];
-	smv->print();
+	//smv->print();
 
+	Filter_Sort(smv);
 	std::vector<std::string> tmp;
 	return tmp;
+}
+
+void Graph_Algorithm::salesMan::Filter_Sort (smvector* smv) {
+	std::map<double,sm_pair*> map;
+
+	for (unsigned int i=0;i<smv->vec.size();i++) {
+		if (0) {
+			continue;
+		}
+		map[smv->vec[i]->cost] = smv->vec[i];
+	}
+	for (std::map<double,sm_pair*>::iterator it = map.begin(); it != map.end();it++) {
+		it->second->print();
+	}
+	return;
 }
