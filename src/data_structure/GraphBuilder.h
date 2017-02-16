@@ -10,6 +10,7 @@
 
 #include "../file_parser/Csv.h"
 #include "GraphFilter.h"
+#include "addDummyEdges.h"
 
 namespace dataStracture {
 
@@ -17,7 +18,7 @@ class GraphBuilder {
 public:
 	GraphBuilder();
 	virtual Graph* buildGraph(std::string file);
-	virtual Graph* buildGraph(Graph* g, GraphFilter* gf, int addEdges = 1);
+	virtual Graph* buildGraph(Graph* g, GraphFilter* gf, int addEdges = 1, int addDummyEdges = 1);
 	virtual ~GraphBuilder();
 };
 

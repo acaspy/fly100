@@ -14,6 +14,7 @@
 
 #include "algo/salesMan.h"
 #include "utils/dateUtils.h"
+#include "utils/GraphUtils.h"
 #include "geo/city.h"
 #include <time.h>
 #include <ctime>
@@ -63,11 +64,13 @@ int main(int argc, char** argv) {
 	dataStracture::Graph* g = gb.buildGraph(fn);
 
 	//std::cout << "Print g" << std::endl;
-	g->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g2.csv");
+	//g->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g2.csv");
 
 	dataStracture::GraphFilter* gf = new dataStracture::GraphFilter;
 	gf->setDates(dates);
 	dataStracture::Graph* g3 = gb.buildGraph(g,gf,1);
+
+	Utils::GraphUtils::addDummyEdges(g3,dates);
 
 	//std::cout << "Print g3 before man" << std::endl;
 	//g3->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g3.csv");

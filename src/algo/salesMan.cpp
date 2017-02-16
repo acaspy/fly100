@@ -82,8 +82,12 @@ std::vector<std::string> Graph_Algorithm::salesMan::calc (int num, geo::city* st
 		dummy = !dummy;
 	}
 
-
 	cur = _g->getVertex(end);
+	if (current.count(cur) == 0) {
+		std::cout << "Couldn't find flights. Try to search with different args" << std::endl;
+		std::vector<std::string> tmp;
+		return tmp;
+	}
 	smv = current[cur];
 	smv->print();
 

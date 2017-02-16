@@ -6,6 +6,7 @@
  */
 
 #include "GraphBuilder.h"
+#include "../utils/GraphUtils.h"
 
 namespace dataStracture {
 
@@ -22,11 +23,12 @@ Graph* GraphBuilder::buildGraph(std::string file) {
 	return g;
 }
 
-Graph* GraphBuilder::buildGraph(Graph* g, GraphFilter* gf, int addEdges) {
+//Graph* GraphBuilder::buildGraph(Graph* g,vector<int>, int addEdges, int addDummyEdges) {
+
+Graph* GraphBuilder::buildGraph(Graph* g, GraphFilter* gf, int addEdges, int addDummyEdges) {
 	Graph* ng = new Graph();
 	std::vector<Vertex*> origVertices = g->getVertices();
 	std::vector<Vertex*> afterFilterVertices;
-int counter = 0;
 	for (unsigned int i=0;i<origVertices.size(); i++) {
 		Vertex* v = origVertices[i];
 
@@ -35,7 +37,6 @@ int counter = 0;
 				continue;
 			}
 		}
-		counter++;
 		afterFilterVertices.push_back(v);
 		ng->addVertex(v->getId());
 	}
@@ -55,5 +56,8 @@ int counter = 0;
 	}
 	return ng;
 }
+
+
+
 
 }/* namespace dataStracture */
