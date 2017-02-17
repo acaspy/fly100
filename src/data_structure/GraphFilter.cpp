@@ -9,13 +9,8 @@
 
 namespace dataStracture {
 
-GraphFilter::GraphFilter() {
-	// TODO Auto-generated constructor stub
-
-}
 
 GraphFilter::~GraphFilter() {
-	// TODO Auto-generated destructor stub
 }
 
 bool GraphFilter::valid(Vertex* v) {

@@ -31,7 +31,6 @@ Graph* GraphBuilder::buildGraph(Graph* g, GraphFilter* gf, int addEdges, int add
 	std::vector<Vertex*> afterFilterVertices;
 	for (unsigned int i=0;i<origVertices.size(); i++) {
 		Vertex* v = origVertices[i];
-
 		if (gf) {
 			if (! gf->valid(v)) {
 				continue;
@@ -54,6 +53,7 @@ Graph* GraphBuilder::buildGraph(Graph* g, GraphFilter* gf, int addEdges, int add
 			}
 		}
 	}
+	Utils::GraphUtils::addDummyEdges(ng,gf->getDates());
 	return ng;
 }
 
