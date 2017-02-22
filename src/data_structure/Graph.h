@@ -57,10 +57,7 @@ public:
     Graph() : id(counter) { counter++; }
     ~Graph();
     Graph (const Graph* g) :  id(counter), _vertices (g->_vertices) { counter++; }
-    //Graph (const Graph* g, std::vector<int>);
-    void CloneFilteredGraph(Graph* g, std::vector<int>, int addEdges = 1, int addDummyEdges = 0);
-    void AddDummyEdges();
-    void addVertex(geo::city* id) {CreateVertex(id);}
+    Vertex* CreateVertex(geo::city* id);
     std::vector<Vertex* > getNeighbours(Vertex* id);
     std::vector<geo::city* > getNeighbours(geo::city* id);
     void addEdge( geo::city* from, geo::city* to, tran::transport* tran);
@@ -69,10 +66,9 @@ public:
     void printGraph(std::string file) ;
     std::vector<Vertex*> getVertices ();
     Vertex* getVertex( geo::city* id ) ;
-    tran::transport* getTran( geo::city* from, geo::city* to);
 
 protected:
-    Vertex* CreateVertex(geo::city* id);
+
 
 private:
     int id;

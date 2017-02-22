@@ -15,8 +15,6 @@ dateUtils::dateUtils() {
 dateUtils::~dateUtils() {
 }
 
-
-
 void dateUtils::spanDates (std::vector<int>& dates, std::string start_s, std::string end_s, int flights) {
 	int start = atoi(start_s.c_str());
 	int end = atoi(end_s.c_str());

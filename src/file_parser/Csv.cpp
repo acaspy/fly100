@@ -23,6 +23,7 @@ void Csv::parse(dataStracture::Graph* g) {
 	geo::city* city_from;
 	geo::city* city_to;
 	tran::transport* t;
+	dataStracture::Edge* e;
 	for( std::string line; getline( input, line ); ) {
 		std::istringstream ss(line);
 		std::string token;
@@ -36,17 +37,20 @@ void Csv::parse(dataStracture::Graph* g) {
 		double cost = atof( arr_string[5].c_str());
 		int date = atoi( arr_string[2].c_str());
 		city_from = geo::city::getCity(from);
-		if (city_from == 0) {
+		dataStracture::Vertex* v_from = g->getVertex(city_from);
+		if (v_from == 0) {
 			city_from = new geo::cityday(arr_string[0],date);
-			g->addVertex(city_from);
+			v_from = g->CreateVertex(city_from);
 		}
 		city_to = geo::city::getCity(to);
-		if (city_to == 0) {
+		dataStracture::Vertex* v_to  = g->getVertex(city_to);
+		if (v_to == 0) {
 			city_to = new geo::cityday(arr_string[1],date);
-			g->addVertex(city_to);
+			v_to = g->CreateVertex(city_to);
 		}
-		t = g->getTran(city_from,city_to);
-		if (t != 0) {
+		e = v_from->getEdge(v_to);
+		if (e != 0) {
+			t = e->getTran();
 			if (cost < t->getCost()) {
 				t = new tran::transport(city_from,city_to,cost);
 				g->updateEdge(city_from,city_to,t);

@@ -62,9 +62,10 @@ int main(int argc, char** argv) {
 	dataStracture::GraphBuilder gb;
 	dataStracture::Graph* g = gb.buildGraph(fn);
 
-	//std::cout << "Print g" << std::endl;
-	//g->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g2.csv");
+	std::cout << "Print g" << std::endl;
+	g->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g2.csv");
 
+	std::cout << "Done" << std::endl;
 	dataStracture::GraphFilter* gf = new dataStracture::GraphFilter(dates);
 	dataStracture::Graph* g3 = gb.buildGraph(g,gf,1);
 

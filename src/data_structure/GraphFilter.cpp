@@ -32,4 +32,10 @@ bool GraphFilter::valid(Vertex* v) {
 }
 
 
+Vertex* GraphFilter::getMainVertex(Vertex* v) {
+	return v;
+}
+
+
+
 } /* namespace dataStracture */

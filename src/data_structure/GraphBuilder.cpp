@@ -37,20 +37,23 @@ Graph* GraphBuilder::buildGraph(Graph* g, GraphFilter* gf, int addEdges, int add
 			}
 		}
 		afterFilterVertices.push_back(v);
-		ng->addVertex(v->getId());
 	}
 	if (! addEdges) {
 		return ng;
 	}
 	for (unsigned int i=0;i<afterFilterVertices.size();i++) {
 		Vertex* v = afterFilterVertices[i];
+		Vertex* v_new = gf->getMainVertex(afterFilterVertices[i]);
+		//ng->addVertex(v_new->getId());
 		std::vector<Edge*> edges = v->getEdges();
 		for (unsigned j=0; j<edges.size();j++) {
-			geo::city* dest = edges[j]->getDestination()->getId();
-			Vertex* to = ng->getVertex(dest);
-			if (to) {
-				ng->addEdge(v->getId(),dest,edges[j]->getTran());
+			if (gf) {
+				if (! gf->valid(edges[j])) {
+					continue;
+				}
 			}
+			Vertex* to_new = gf->getMainVertex(edges[j]->getDestination());
+			ng->addEdge(v_new->getId(),to_new->getId(),edges[j]->getTran());
 		}
 	}
 	Utils::GraphUtils::addDummyEdges(ng,gf->getDates());

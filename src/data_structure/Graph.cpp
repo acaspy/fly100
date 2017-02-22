@@ -43,46 +43,6 @@ Graph::~Graph() {
 	}
 }
 
-void Graph::CloneFilteredGraph(Graph* g, std::vector<int> dates, int addEdges, int addDummyEdges) {
-	std::vector<std::tr1::unordered_map<std::string,geo::city*> > dummy (dates.size());
-	unsigned int i;
-	for (std::tr1::unordered_map<geo::city*,Vertex*>::iterator it = g->_vertices.begin();it!=g->_vertices.end();it++) {
-			int flag = 0;
-			int d;
-			for (i=0;i<dates.size();i++) {
-				d = it->first->getDate();
-				if (d == dates[i]) {
-					flag = 1;
-					break;
-				}
-			}
-			if (flag) {
-				this->addVertex(it->second->getId());
-				if (addDummyEdges) {
-					dummy[i][it->first->getName()] = it->second->getId();
-				}
-			}
-		}
-	if (addEdges) {
-		for (std::tr1::unordered_map<geo::city*,Vertex*>::iterator it = _vertices.begin();it!=_vertices.end();it++) {
-			geo::city* city = it->first;
-			std::vector<geo::city*> neighbours = g->getNeighbours(city);
-			for (unsigned int i=0; i<neighbours.size();i++) {
-				addEdge(city,neighbours[i],g->getTran(city,neighbours[i]));
-			}
-		}
-	}
-	if (addDummyEdges) {
-		for (i=0;i<dummy.size()-1;i++) {
-			for (std::tr1::unordered_map<std::string,geo::city*>::iterator it=dummy[i].begin();it!=dummy[i].end();it++) {
-				if (dummy[i+1].count(it->first) != 0) {
-					addEdge(it->second,dummy[i+1][it->first],new tran::transport(dummy[i][it->first],dummy[i+1][it->first],-1));
-				}
-			}
-		}
-	}
-}
-
 std::vector<Vertex*> Graph::getVertices () {
 	std::vector<Vertex*> res;
 	for (std::tr1::unordered_map<geo::city*,Vertex*>::iterator it = _vertices.begin();it!=_vertices.end();it++) {
@@ -147,25 +107,7 @@ Vertex* Graph::getVertex( geo::city* id ) {
 	}
 	return 0;
 }
-tran::transport* Graph::getTran( geo::city* from, geo::city* to) {
-	Vertex* v1;
-	if (_vertices.count(from) != 0) {
-		v1 = _vertices[from];
-	} else {
-		return 0;
-	}
-	Vertex* v2;
-	if (_vertices.count(to) != 0) {
-		v2 = _vertices[to];
-	} else {
-		return 0;
-	}
-	Edge* e = v1->getEdge(v2);
-	if (e != 0) {
-		return e->getTran();
-	}
-	return 0;
-}
+
 
 Vertex* Graph::CreateVertex(geo::city* id) {
 	if (_vertices.count(id) == 1){

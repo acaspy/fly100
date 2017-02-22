@@ -17,10 +17,12 @@ public:
 	GraphFilter(std::vector<int>& dates) : _dates(dates) {}
 	virtual ~GraphFilter();
 	virtual bool valid(Vertex* v);
+	virtual bool valid(Edge* e) {return true;}
 	std::vector<int> getDates () {return _dates;}
 	void setFilteredCities(std::vector<std::string> cityNames) {
 		_cities = cityNames;
 	}
+	virtual Vertex* getMainVertex(Vertex* v);
 
 private:
 	std::vector<int> _dates;
