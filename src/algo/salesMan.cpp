@@ -111,7 +111,7 @@ void Graph_Algorithm::salesMan::Filter_Sort (smvector* smv) {
 	int num_results = 15;
 	for (std::map<double,sm_pair*>::iterator it = map.begin(); it != map.end();it++) {
 		it->second->print();
-		if (num_results) {
+		if ( num_results) {
 			num_results--;
 		} else {
 			break;
