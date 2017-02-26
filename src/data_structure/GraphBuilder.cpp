@@ -23,8 +23,6 @@ Graph* GraphBuilder::buildGraph(std::string file) {
 	return g;
 }
 
-//Graph* GraphBuilder::buildGraph(Graph* g,vector<int>, int addEdges, int addDummyEdges) {
-
 Graph* GraphBuilder::buildGraph(Graph* g, GraphFilter* gf, int addEdges, int addDummyEdges) {
 	Graph* ng = new Graph();
 	std::vector<Vertex*> origVertices = g->getVertices();
@@ -44,7 +42,6 @@ Graph* GraphBuilder::buildGraph(Graph* g, GraphFilter* gf, int addEdges, int add
 	for (unsigned int i=0;i<afterFilterVertices.size();i++) {
 		Vertex* v = afterFilterVertices[i];
 		Vertex* v_new = gf->getMainVertex(afterFilterVertices[i]);
-		//ng->addVertex(v_new->getId());
 		std::vector<Edge*> edges = v->getEdges();
 		for (unsigned j=0; j<edges.size();j++) {
 			if (gf) {
@@ -52,7 +49,11 @@ Graph* GraphBuilder::buildGraph(Graph* g, GraphFilter* gf, int addEdges, int add
 					continue;
 				}
 			}
+			Vertex* tttt = edges[j]->getDestination();
 			Vertex* to_new = gf->getMainVertex(edges[j]->getDestination());
+			if (to_new == 0) {
+				i++;
+			}
 			ng->addEdge(v_new->getId(),to_new->getId(),edges[j]->getTran());
 		}
 	}

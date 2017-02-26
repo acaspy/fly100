@@ -1,0 +1,2 @@
+C:\\Users\\tsnappir\\new_eclipse\\agancy_100\\docs\\test.csv 20170401 WAW 20170420 WAW 4
+C:\\Users\\tsnappir\\new_eclipse\\agancy_100\\docs\\tttt.csv 20170501 BCN 20170521 BCN 4

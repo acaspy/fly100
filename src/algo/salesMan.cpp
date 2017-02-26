@@ -42,9 +42,9 @@ std::vector<std::string> Graph_Algorithm::salesMan::calc (int num, geo::city* st
 	std::vector<sm_pair*>::iterator smpv_it;
 	bool dummy = 0;
 	for (;num>0; num--) {
-
 		for(map_it = current.begin(); map_it != current.end(); ++map_it) {
 			cur = map_it->first;
+			//std::cout << "node:" << cur->getId()->getFullName() << std::endl;
 			smv = map_it->second;
 			smp_vec = smv->vec;
 			ve = cur->getEdges();
@@ -82,6 +82,9 @@ std::vector<std::string> Graph_Algorithm::salesMan::calc (int num, geo::city* st
 		dummy = !dummy;
 	}
 
+	std::cout << "end algo" << std::endl;
+
+
 	cur = _g->getVertex(end);
 	if (current.count(cur) == 0) {
 		std::cout << "Couldn't find flights. Try to search with different args" << std::endl;
@@ -105,8 +108,14 @@ void Graph_Algorithm::salesMan::Filter_Sort (smvector* smv) {
 		}
 		map[smv->vec[i]->cost] = smv->vec[i];
 	}
+	int num_results = 15;
 	for (std::map<double,sm_pair*>::iterator it = map.begin(); it != map.end();it++) {
 		it->second->print();
+		if (num_results) {
+			num_results--;
+		} else {
+			break;
+		}
 	}
 	return;
 }

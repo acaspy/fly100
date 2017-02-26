@@ -15,7 +15,7 @@ namespace tran {
 
 class transport {
 public:
-	transport(geo::city* from, geo::city* to, double cost) : _from(from) , _to(to), _cost (cost) {}
+	transport(geo::city* from, geo::city* to, double cost, int date) : _from(from) , _to(to), _cost (cost), _date(date) {}
 	virtual ~transport();
 	void setCost(double cost) { _cost = cost;}
 	double getCost () {return _cost;}
@@ -25,6 +25,7 @@ private:
 	geo::city* _from;
 	geo::city* _to;
 	double _cost;
+	int _date;
 };
 
 } /* namespace tran */

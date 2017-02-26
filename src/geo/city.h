@@ -38,13 +38,6 @@ protected:
 
  /* namespace geo */
 
-
-/*
-	std::string ttt =
-	return lhs.getName() == rhs.getName();
-}
-*/
-
 }
 
 #endif /* GEO_CITY_H_ */

@@ -12,7 +12,7 @@
 #include "data_structure/GraphFilter.h"
 
 #include "algo/salesMan.h"
-#include "utils/dateUtils.h"
+#include "utils/functions.h"
 #include "utils/GraphUtils.h"
 #include "geo/city.h"
 #include <time.h>
@@ -37,43 +37,47 @@ int main(int argc, char** argv) {
 	std::string end_city = argv[5];
 	int flights = atoi(argv[6]);
 
-
-/*
-	std::string fn = "C:\\Users\\tsnappir\\new_eclipse\\flights.csv";
-	std::string start_date = "20170401";
-	std::string start_city = "WAW";
-	std::string end_date = "20170420";
-	std::string end_city = "WAW";
-	std::string flights_s = "4";
-	int flights = atoi(flights_s.c_str());
-*/
-
+	std::string debug_graph1;
+	std::string debug_graph2;
+	bool debug = false;
+	if (argc >7) {
+		debug_graph1 = argv[7];
+		debug_graph2 = argv[8];
+		debug = true;
+	}
 
 	std::string start_algo = start_city + "_" + start_date;
 	std::string end_algo = end_city + "_" + end_date;
 
-	std::vector<int> dates (flights);
-	Utils::dateUtils::spanDates(dates,start_date,end_date,flights);
+	std::vector<std::vector<int> > dates =	DateUtils::functions::spanDates(start_date,end_date,flights-1,1);
 
-	for (unsigned int i=0; i<dates.size(); i++) {
-		std::cout << "flight on " << dates[i] << std::endl;
+	for (int i=0; i< dates.size();i++) {
+		std::cout << i << std::endl;
+		for (int j=0; j< dates[i].size();j++) {
+			std::cout << dates[i][j] << " , ";
+		}
+		std::cout << std::endl;
 	}
 
 	dataStracture::GraphBuilder gb;
 	dataStracture::Graph* g = gb.buildGraph(fn);
 
-	std::cout << "Print g" << std::endl;
-	g->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g2.csv");
+	if (debug) {
+		std::cout << "Print g" << std::endl;
+		g->printGraph(debug_graph1);
+		std::cout << "Done" << std::endl;
+	}
 
-	std::cout << "Done" << std::endl;
-	dataStracture::GraphFilter* gf = new dataStracture::GraphFilter(dates);
+	dataStracture::GraphFilter* gf = new dataStracture::GraphFilter(g,dates);
 	dataStracture::Graph* g3 = gb.buildGraph(g,gf,1);
 
-	//std::cout << "Print g3 before man" << std::endl;
-	//g3->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g3.csv");
+	if (debug) {
+		std::cout << "Print final graph before algorithm" << std::endl;
+		g3->printGraph(debug_graph2);
+		std::cout << "Done" << std::endl;
+	}
 
-	//g3->printGraph("C:\\Users\\tsnappir\\new_eclipse\\g4.csv");
-	//std::cout << "Start to run algorithm" << std::endl;
+	std::cout << "Start to run algorithm" << std::endl;
 	clock_t begin = clock();
 
 	Graph_Algorithm::salesMan* sm = new Graph_Algorithm::salesMan(g3);

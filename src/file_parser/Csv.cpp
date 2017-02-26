@@ -52,11 +52,11 @@ void Csv::parse(dataStracture::Graph* g) {
 		if (e != 0) {
 			t = e->getTran();
 			if (cost < t->getCost()) {
-				t = new tran::transport(city_from,city_to,cost);
+				t = new tran::transport(city_from,city_to,cost,date);
 				g->updateEdge(city_from,city_to,t);
 			}
 		} else {
-			t = new tran::transport(city_from,city_to,cost);
+			t = new tran::transport(city_from,city_to,cost,date);
 			// if exist - take the cheapest flight
 			g->addEdge(city_from,city_to,t);
 		}

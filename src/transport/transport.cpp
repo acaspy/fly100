@@ -16,7 +16,7 @@ transport::~transport() {
 }
 
 void transport::print(std::ostream& fd) {
-	fd << "Transport from " << _from->getName() << " to " << _to->getName() << " ; cost: " << _cost << std::endl;
+	fd << "Transport from " << _from->getName() << " to " << _to->getName() << " ; date: " << _date << " ; cost: " << _cost << std::endl;
 }
 
 } /* namespace tran */

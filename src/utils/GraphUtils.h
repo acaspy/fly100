@@ -16,7 +16,7 @@ class GraphUtils {
 public:
 	GraphUtils();
 	virtual ~GraphUtils();
-	static void addDummyEdges(dataStracture::Graph* g, const std::vector<int> dates);
+	static void addDummyEdges(dataStracture::Graph* g, const std::vector<int>& dates);
 };
 
 } /* namespace Utils */

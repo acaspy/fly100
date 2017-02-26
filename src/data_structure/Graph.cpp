@@ -35,7 +35,7 @@ void Vertex::printVertex(std::ostream& fd) {
 
 
 int Graph::counter = 0;
-tran::transport* Graph::dummyTran = new tran::transport(0,0,-1);
+tran::transport* Graph::dummyTran = new tran::transport(0,0,-1,-1);
 
 Graph::~Graph() {
 	for (std::tr1::unordered_map<geo::city*,Vertex*>::iterator it = _vertices.begin();it!=_vertices.end();it++) {
