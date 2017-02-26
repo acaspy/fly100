@@ -29,7 +29,7 @@ public:
 
 	void print () {
 		std::cout << "Print sm_pair. cost : " << cost << std::endl;
-		for (unsigned int i=0;i<_vertices.size()-1;i++) {
+		for (unsigned int i=0;i<_vertices.size()-1;i+=2) {
 			dataStracture::Vertex* v = _vertices[i];
 			//std::cout << v->getId()->getName() << " , " << v->getEdge(_vertices[i+1])->getTran()->getCost() << " , ";
 			v->getEdge(_vertices[i+1])->getTran()->print();
