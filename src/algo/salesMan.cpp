@@ -101,7 +101,6 @@ std::vector<std::string> Graph_Algorithm::salesMan::calc (int num, geo::city* st
 
 void Graph_Algorithm::salesMan::Filter_Sort (smvector* smv) {
 	std::map<double,sm_pair*> map;
-
 	for (unsigned int i=0;i<smv->vec.size();i++) {
 		if (0) {
 			continue;

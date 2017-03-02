@@ -36,6 +36,9 @@ int main(int argc, char** argv) {
 	std::string end_date = argv[4];
 	std::string end_city = argv[5];
 	int flights = atoi(argv[6]);
+	//int flex = atoi(argv[7]);
+	//int uniqe_city = atoi(argv[8]);
+
 
 	std::string debug_graph1;
 	std::string debug_graph2;
@@ -51,12 +54,14 @@ int main(int argc, char** argv) {
 
 	std::vector<std::vector<int> > dates =	DateUtils::functions::spanDates(start_date,end_date,flights-1,1);
 
-	for (int i=0; i< dates.size();i++) {
-		std::cout << i << std::endl;
-		for (int j=0; j< dates[i].size();j++) {
-			std::cout << dates[i][j] << " , ";
+	if (debug) {
+		for (unsigned int i=0; i< dates.size();i++) {
+			std::cout << i << std::endl;
+			for (unsigned int j=0; j< dates[i].size();j++) {
+				std::cout << dates[i][j] << " , ";
+			}
+			std::cout << std::endl;
 		}
-		std::cout << std::endl;
 	}
 
 	dataStracture::GraphBuilder gb;
@@ -80,7 +85,7 @@ int main(int argc, char** argv) {
 	std::cout << "Start to run algorithm" << std::endl;
 	clock_t begin = clock();
 
-	Graph_Algorithm::salesMan* sm = new Graph_Algorithm::salesMan(g3);
+	Graph_Algorithm::salesMan* sm = new Graph_Algorithm::salesMan(g3,gf);
 	clock_t end = clock();
 	double elapsed_secs = double(end - begin) / (CLOCKS_PER_SEC/1000);
 	sm->calc(flights*2-1,geo::city::getCity(start_algo),geo::city::getCity(end_algo));

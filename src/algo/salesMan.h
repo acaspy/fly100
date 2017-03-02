@@ -15,7 +15,7 @@
 #include <string>
 #include <iostream>
 
-#include "../data_structure/graph.h"
+#include "../data_structure/GraphFilter.h"
 #include "../geo/cityday.h"
 
 namespace Graph_Algorithm {
@@ -54,13 +54,14 @@ struct smvector {
 
 class salesMan {
 public:
-	salesMan(dataStracture::Graph* g) : _g(g) {}
+	salesMan(dataStracture::Graph* g,dataStracture::GraphFilter* gf) : _g(g) , _gf(gf) {}
 	~salesMan();
 	std::vector<std::string> calc (int num, geo::city* start, geo::city* end);
 	int ElemExist(sm_pair* smp, std::string elem);
 	void Filter_Sort(smvector* smv);
 private:
 	dataStracture::Graph* _g;
+	dataStracture::GraphFilter* _gf;
 };
 
 }

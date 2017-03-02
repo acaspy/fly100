@@ -10,13 +10,31 @@
 namespace dataStracture {
 
 
-GraphFilter::GraphFilter(Graph* g, std::vector<std::vector<int> >& dates) : _g(g) {
+GraphFilter::GraphFilter(Graph* g, std::vector<std::vector<int> >& dates, std::string requierdCities, std::string skipCities) : _g(g) , _keepOtherCities(true) {
 	for (int i=0; i<dates.size();i++) {
 		for (int j=0; j<dates[i].size();j++) {
 			_dates[dates[i][j]] = dates[i][0];
 		}
 	}
+	std::string token;
+	std::istringstream ss(requierdCities);
+	int length = dates.size();
+	while (std::getline(ss, token, ',')) {
+		_specCities[token] = true;
+		length--;
+	}
+	if ( ! length) {
+		_keepOtherCities = false;
+		return;
+	}
+	std::istringstream ss2(skipCities);
+	while (std::getline(ss2, token, ',')) {
+		_specCities[token] = false;
+	}
 }
+
+
+
 
 GraphFilter::~GraphFilter() {
 }
@@ -25,11 +43,11 @@ bool GraphFilter::valid(Vertex* v) {
 	if (_dates.count(v->getId()->getDate()) == 0) {
 		return false;
 	}
-
-	for (unsigned int i=0; i< _cities.size(); i++) {
-		if (_cities[i] == v->getId()->getName()) {
-			return false;
-		}
+	if (_specCities.count(v->getId()->getName())) {
+		return _specCities[(v->getId()->getName())];
+	}
+	if ( ! _keepOtherCities) {
+		return false;
 	}
 	return true;
 }
