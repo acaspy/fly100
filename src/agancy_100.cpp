@@ -40,8 +40,8 @@ int main(int argc, char** argv) {
 	//int uniqe_city = atoi(argv[8]);
 
 
-	std::string debug_graph1;
-	std::string debug_graph2;
+	std::string debug_graph1 = "";
+	std::string debug_graph2 = "";
 	bool debug = false;
 	if (argc >7) {
 		debug_graph1 = argv[7];
@@ -69,7 +69,13 @@ int main(int argc, char** argv) {
 
 	if (debug) {
 		std::cout << "Print g" << std::endl;
-		g->printGraph(debug_graph1);
+		if (debug_graph1 != "") {
+			g->printGraph();
+		} else {
+			std::ofstream fd(debug_graph1.c_str());
+			g->printGraph(fd);
+		}
+
 		std::cout << "Done" << std::endl;
 	}
 
@@ -78,7 +84,12 @@ int main(int argc, char** argv) {
 
 	if (debug) {
 		std::cout << "Print final graph before algorithm" << std::endl;
-		g3->printGraph(debug_graph2);
+		if (debug_graph2 != "") {
+			g3->printGraph();
+		} else {
+			std::ofstream fd(debug_graph2.c_str());
+			g3->printGraph(fd);
+		}
 		std::cout << "Done" << std::endl;
 	}
 

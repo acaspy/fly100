@@ -63,7 +63,7 @@ public:
     void addEdge( geo::city* from, geo::city* to, tran::transport* tran);
     void updateEdge( geo::city* from, geo::city* to, tran::transport* tran) ;
     int vertexExist(geo::city* id) ;
-    void printGraph(std::string file) ;
+    void printGraph(std::ostream& fd = std::cout) ;
     std::vector<Vertex*> getVertices ();
     Vertex* getVertex( geo::city* id ) ;
 

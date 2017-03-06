@@ -91,15 +91,12 @@ int Graph::vertexExist(geo::city* id) {
 	}
 	return 0;
 }
-void Graph::printGraph(std::string file) {
-	std::ofstream fd;
-	fd.open (file.c_str());
+void Graph::printGraph(std::ostream& fd) {
 	fd << "Printing graph:" << std::endl;
 	for (std::tr1::unordered_map<geo::city*,Vertex*>::iterator it = _vertices.begin();it!=_vertices.end();it++) {
 		it->second->printVertex(fd);
 	}
 	fd << "end Graph" << std::endl;
-	fd.close();
 }
 Vertex* Graph::getVertex( geo::city* id ) {
 	if (_vertices.count(id) != 0) {
